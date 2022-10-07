@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    // tag
+    Route::resource("/tag", TagController::class);
+
+    // contact
+    Route::get('contact/trashed', [ContactController::class, 'trashed']);
+    Route::post('contact/trashed/{id}/restore', [ContactController::class, 'trashedRestore'])->name('contact.trashed.restore');
+    Route::post('contact/trashed/{id}/force_delete', [ContactController::class, 'trashedDelete'])->name('contact.trashed.destroy');
+    Route::resource("/contact", ContactController::class);
+    Route::get('export_contact_pdf', [ContactController::class, 'export_contact_pdf']);
+
+
+});
 
 require __DIR__.'/auth.php';

@@ -1,13 +1,19 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
+            {{-- <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            </a> --}}
+            <div>
+                <img src="{{url('assets/img/phonebook.jpg')}}" class="image text-center" alt="image" width="120px">
+            </div>
         </x-slot>
-
+       
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -17,8 +23,6 @@
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
@@ -29,8 +33,6 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Remember Me -->
@@ -51,6 +53,11 @@
                 <x-primary-button class="ml-3">
                     {{ __('Log in') }}
                 </x-primary-button>
+            </div>
+            <div class="flex items-center mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Create an Account?') }}
+                </a>
             </div>
         </form>
     </x-auth-card>
