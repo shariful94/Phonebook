@@ -42,7 +42,7 @@
                     <tr>
                         <td>
                             @if ($contact->photo)
-                                <img src="{{url(Storage::url($contact->photo))}}" class="image" alt="image" class="image-fluid rounded-circle" height="50px">
+                                <img src="{{url(Storage::url($contact->photo))}}" class="img-profile rounded-circle" alt="image" class="image-fluid rounded" height="50px">
                             @else
                                 <img src="{{url('assets/img/avatars/avatar.jpg')}}" class="image" alt="image">
                             @endif
@@ -50,7 +50,7 @@
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->phone }}</td>
                         <td>{{ $contact->email }}</td>
-                        <td class="d-flex justify-content-between">
+                        <td class="d-flex justify-content-between mt-2 ">
                             {!! Form::open(['method' => 'delete','route' => ['contact.destroy', $contact->id]]) !!}
                                 <button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm btn-circle">Delete</button>
                             {!! Form::close() !!}

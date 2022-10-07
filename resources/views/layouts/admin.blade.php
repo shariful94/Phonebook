@@ -48,12 +48,12 @@
 							<i class="align-middle" data-feather="settings"></i>
 							</a>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+							<a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<span class="text-dark">{{Auth::user()->name}}</span>
 								@if ($user->profile)
                                 <img src="{{url(Storage::url($user->profile->image))}}" class="img-profile rounded-circle" alt="Profile Image" width="40px">
                                 @else
-								<img src="{{url('assets/img/avatars/avatar.jpg')}}" class="img-profile rounded-circle" alt="Profile Image" width="40px">
+								<img src="{{url('assets/img/avatars/fiverprofile.jpg')}}" class="img-profile rounded-circle" alt="Profile Image" height="50px" width="50px">
                                 @endif
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
