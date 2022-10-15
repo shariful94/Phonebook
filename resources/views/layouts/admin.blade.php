@@ -18,17 +18,20 @@
 	<title>{{ config('app.name', 'Laravel') }} | @yield('pagetitle')</title>
 
 	<link href="{{url('assets/css/app.css')}}" rel="stylesheet">
-	{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"> --}}
 	<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+	{{-- toastr notification css --}}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
+	{{-- 	<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="{{url('dashboard')}}"><span class="align-middle">PhoneBook</span></a>
+				<a class="sidebar-brand" href="{{url('contact')}}"><span class="align-middle">PhoneBook</span></a>
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">Pages</li>
 					<li class="sidebar-item {{ Request::is('contact') ? 'active' : '' }}">
@@ -36,11 +39,11 @@
 					</li>
 				</ul>
 			</div>
-		</nav>
+		</nav> --}}
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"><i class="hamburger align-self-center"></i></a>
+				<a class="sidebar-toggle js-sidebar-toggle"><h1>PhoneBook</h1></a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -77,9 +80,9 @@
 			<footer class="footer">
 				<div class="container-fluid">
 					<div class="row text-muted">
-						<div class="col-6 text-start">
+						<div class="col-12 text-center">
 							<p class="mb-0">
-								<a class="text-muted" href="#" target="_blank"><strong>PhoneBook</strong></a> - <a class="text-muted" href="#" target="_blank">&copy; {{date('Y');}} <strong>Syed Zayed Hossain</strong></a>
+								<a class="text-muted" href="#" target="_blank"><strong>PhoneBook</strong></a> Developed By- <a class="text-muted" href="#" target="_blank"><strong>Md Shariful Islam</strong></a>
 							</p>
 						</div>
 					</div>
@@ -89,9 +92,10 @@
 	</div>
 
 	<script src="{{url('assets/js/app.js')}}"></script>
-	{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> --}}
 	<script src="{{url('assets/js/jquery-3.6.0.min.js')}}"></script>
 	<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script>
 		$(document).ready( function () {
 			$('#dataTable').DataTable();
@@ -103,7 +107,43 @@
             }
         });
 	</script>
-
+	<script>
+		@if(Session::has('message'))
+		toastr.options =
+		{
+			"closeButton" : true,
+			"progressBar" : true
+		}
+				toastr.success("{{ session('message') }}");
+		@endif
+	
+		@if(Session::has('error'))
+		toastr.options =
+		{
+			"closeButton" : true,
+			"progressBar" : true
+		}
+				toastr.error("{{ session('error') }}");
+		@endif
+	
+		@if(Session::has('info'))
+		toastr.options =
+		{
+			"closeButton" : true,
+			"progressBar" : true
+		}
+				toastr.info("{{ session('info') }}");
+		@endif
+	
+		@if(Session::has('warning'))
+		toastr.options =
+		{
+			"closeButton" : true,
+			"progressBar" : true
+		}
+			toastr.warning("{{ session('warning') }}");
+		@endif
+	</script>
     @yield('script')
 
 </body>
